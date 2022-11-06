@@ -1,1 +1,1 @@
-# fast_api_k8s
+# fast-api-k8s
