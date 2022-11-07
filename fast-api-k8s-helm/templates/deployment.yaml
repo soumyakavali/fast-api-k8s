@@ -57,6 +57,9 @@ spec:
               name: TLS_CERTIFICATEKEYFILE
               value: "{{.Values.db.tlsCertficateKeyFilePath}}"
             - 
+              name: TLS_CA_CERTIFICATEKEYFILE
+              value: "{{.Values.db.tlsCaFilePath}}"
+            - 
               name: TLS_CERTIFICATEKEYFILE_PASSWORD
               valueFrom:
                   secretKeyRef:
@@ -81,4 +84,6 @@ spec:
             secretName:  {{ include "fast-api-k8s-helm.fullname" . }}
             items:
             - key: key.pem
+              path: "{{.Values.db.tlsCertficateKeyFilePath}}"
+            - key: ca.pem
               path: "{{.Values.db.tlsCertficateKeyFilePath}}"
