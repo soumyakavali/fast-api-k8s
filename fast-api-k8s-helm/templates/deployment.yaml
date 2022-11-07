@@ -28,31 +28,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - volumeMounts:
-          - mountPath: "/var/tmp/tls_certficatekeyfile.pem"
-            name: tls_certificates
-            readOnly: true
-          env:
-          - 
-            name: DB_NAME
-            value: "{{.Values.db.db_name}}"
-          - 
-            name: DB_COLLECTION
-            value: "{{.Values.db.db_collection}}"
-          - 
-            name: MONGO_DB_URL
-            value: "{{.Values.db.mongo_db_url}}"
-          - 
-            name: TLS_CERTIFICATEKEYFILE
-            value: "{{.Values.db.tls_certficatekeyfile}}"
-          - 
-            name: TLS_CERTIFICATEKEYFILE_PASSWORD
-            valueFrom:
-                secretKeyRef:
-                  name: {{ include "fast-api-k8s-helm.fullname" . }}
-                  key: TLS_CERTIFICATEKEYFILE_PASSWORD
-
-          name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -63,6 +39,30 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tlscertificates
+              mountPath: "/etc"
+              readOnly: true
+          env:
+            - 
+              name: DB_NAME
+              value: "{{.Values.db.dbName}}"
+            - 
+              name: DB_COLLECTION
+              value: "{{.Values.db.dbCollection}}"
+            - 
+              name: MONGO_DB_URL
+              value: "{{.Values.db.mongoDBUrl}}"
+            - 
+              name: TLS_CERTIFICATEKEYFILE
+              value: "{{.Values.db.tlsCertficateKeyFilePath}}"
+            - 
+              name: TLS_CERTIFICATEKEYFILE_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ include "fast-api-k8s-helm.fullname" . }}
+                    key: tlsCertficateKeyfilePassword
+                    
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -76,6 +76,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: tls_certificates
+        - name: tlscertificates
           secret:
             secretName:  {{ include "fast-api-k8s-helm.fullname" . }}
+            items:
+            - key: key.pem
+              path: "{{.Values.db.tlsCertficateKeyFilePath}}"

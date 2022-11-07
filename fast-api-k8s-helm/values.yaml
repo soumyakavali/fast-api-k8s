@@ -4,12 +4,12 @@
 
 replicaCount: 1
 db:
-  db_name: sample_db
-  db_collection: sample_db_collection
-  mongo_db_url: http://sample.mongo.url
-  tls_certficatekeyfile: /var/tmp/tls_certficatekeyfile.pem
-  tls_ca_file: /var/tmp/tls_ca.pem
-  tls_certficatekeyfile_password: "sample_passsword"
+  dbName: sample_db
+  dbCollection: sample_db_collection
+  mongoDBUrl: http://sample.mongo.url
+  tlsCertficateKeyFilePath: tls_certficatekeyfile.pem
+  tlsCaFilePath: ca.pem
+  tlsCertficateKeyfilePassword: "sample_passsword"
   
 
 image:

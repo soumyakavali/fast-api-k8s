@@ -1,1 +1,3 @@
 eval $(minikube docker-env)
+docker build -t fast-api-k8s .
+base64 -i ./cert.pem
