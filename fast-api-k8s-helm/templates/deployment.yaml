@@ -28,6 +28,26 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+        - env:
+          - 
+            name: DB_NAME
+            value: "{{.Values.db.db_name}}"
+          - 
+            name: DB_COLLECTION
+            value: "{{.Values.db.db_collection}}"
+          - 
+            name: MONGO_DB_URL
+            value: "{{.Values.db.mongo_db_url}}"
+          - 
+            name: TLS_CERTIFICATEKEYFILE
+            value: "{{.Values.db.tls_certficatekeyfile}}"
+          - 
+            name: TLS_CERTIFICATEKEYFILE
+            valueFrom:
+                secretKeyRef:
+                  name: {{ include "fast-api-k8s-helm.fullname" . }}
+                  key: TLS_CERTIFICATEKEYFILE
+
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}

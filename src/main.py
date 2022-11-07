@@ -10,9 +10,11 @@ DB_NAME = os.getenv("DB_NAME")
 DB_COLLECTION = os.getenv("DB_COLLECTION")
 MONGO_DB_URL = os.getenv("MONGO_DB_URL")
 TLS_CERTIFICATEKEYFILE= os.getenv("TLS_CERTIFICATEKEYFILE")
+TLS_CERTIFICATEKEYFILE_PASSWORD = os.getenv("TLS_CERTIFICATEKEYFILE_PASSWORD")
 db_client = MongoClient(MONGO_DB_URL,
                      tls=True,
-                     tlsCertificateKeyFile=TLS_CERTIFICATEKEYFILE)
+                     tlsCertificateKeyFile=TLS_CERTIFICATEKEYFILE,
+                     tlsCertificateKeyFilePassword= TLS_CERTIFICATEKEYFILE_PASSWORD)
 
 # Message class defined in Pydantic
 class Message(BaseModel):

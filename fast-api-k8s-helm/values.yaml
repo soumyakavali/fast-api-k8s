@@ -3,7 +3,12 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
+db:
+  db_name: sample_db
+  db_collection: sample_db_collection
+  mongo_db_url: http://sample.mongo.url
+  tls_certficatekeyfile: /var/tmp
+  tls_certficatekeyfile_password: "sample_passsword"
 image:
   repository: fast-api-k8s
   pullPolicy: Never
