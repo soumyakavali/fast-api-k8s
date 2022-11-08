@@ -55,10 +55,10 @@ spec:
               value: "{{.Values.db.mongoDBUrl}}"
             - 
               name: TLS_CERTIFICATEKEYFILE
-              value: "{{.Values.db.tlsCertficateKeyFilePath}}"
+              value: "/etc/tls_certficatekeyfile.pem"
             - 
               name: TLS_CA_CERTIFICATEKEYFILE
-              value: "{{.Values.db.tlsCaFilePath}}"
+              value: "/etc/tls_ca.pem"
             - 
               name: TLS_CERTIFICATEKEYFILE_PASSWORD
               valueFrom:
@@ -84,6 +84,6 @@ spec:
             secretName:  {{ include "fast-api-k8s-helm.fullname" . }}
             items:
             - key: key.pem
-              path: "{{.Values.db.tlsCertficateKeyFilePath}}"
+              path: "tls_certficatekeyfile.pem"
             - key: ca.pem
-              path: "{{.Values.db.tlsCertficateKeyFilePath}}"
+              path: "tls_ca.pem"

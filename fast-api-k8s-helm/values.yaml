@@ -7,11 +7,7 @@ db:
   dbName: sample_db
   dbCollection: sample_db_collection
   mongoDBUrl: http://sample.mongo.url
-  tlsCertficateKeyFilePath: tls_certficatekeyfile.pem
-  tlsCaFilePath: ca.pem
-  tlsCertficateKeyfilePassword: "sample_passsword"
   
-
 image:
   repository: fast-api-k8s
   pullPolicy: Never
