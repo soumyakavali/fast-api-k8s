@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: findings-api-deployment
+  labels:
+    app: findings-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: findings-api
+  template:
+    metadata:
+      labels:
+        app: findings-api
+    spec:
+      containers:
+      - name: findings-api-pod
+        image: findings-api-k8s:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: tlscertificates
+            mountPath: "/tmp"
+            readOnly: true
+        env:
+            - 
+              name: TLS_CERTIFICATEKEYFILE
+              value: "/tmp/tls_certficatekeyfile.pem"
+            - 
+              name: TLS_CA_CERTIFICATEKEYFILE
+              value: "/tmp/tls_ca.pem"
+            - 
+              name: TLS_CERTIFICATEKEYFILE_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: findings-api-secret
+                    key: tlsCertficateKeyfilePassword
+      volumes:
+        - name: tlscertificates
+          secret:
+            secretName:  findings-api-secret
+            items:
+            - key: key.pem
+              path: "tls_certficatekeyfile.pem"
+            - key: ca.pem
+              path: "tls_ca.pem"

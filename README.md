@@ -1,1 +1,1 @@
-# fast-api-k8s
+# findings-api-k8s

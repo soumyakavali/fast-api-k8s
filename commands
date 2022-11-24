@@ -1,5 +1,6 @@
 eval $(minikube docker-env)
-docker build -t fast-api-k8s .
+docker build -t findings-api-k8s .
 echo -n "actual_password" | base64
 base64 -i ./cert.pem >> cert.txt
-helm install testapp ./fast-api-k8s-helm
+helm install testapp ./findings-api-k8s-helm --namespace test
+helm upgrade testapp ./findings-api-k8s-helm
