@@ -18,6 +18,9 @@ spec:
       - name: findings-api-pod
         image: findings-api-k8s:latest
         imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: findings-api-config
         resources:
           limits:
             cpu: 100m
