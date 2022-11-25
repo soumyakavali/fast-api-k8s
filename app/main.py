@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from typing import List
 
-from app.findings_routers import findings, health_check
+from findings_routers import findings, health_check
 
 # Instantiate the FastAPI
 app = FastAPI()
