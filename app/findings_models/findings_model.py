@@ -1,5 +1,10 @@
+from typing import Optional
 from pydantic import BaseModel, Field
 
+class FindingResponse(BaseModel):
+    acknowledged: str
+    inserted_count: Optional[int]
+    message:Optional[str]
 
 class Resource(BaseModel):
     account:str
@@ -35,22 +40,24 @@ class Finding(BaseModel):
             "revision": "1",
             "source": "from_source",
             "resource": {
-                "id": "test_id",
-                "cluster_id": "test_cluster",
-                "node_id": "test_node_id",
-                "account": "123456",
+                "resource_id": "test_id",
                 "env": "dev",
-                "region": "us-west-2"
+                "platform": "test_platform",
+                "account": "123456",
+                "region": "us-west-2",
+                "resource_type": "test_resource_type"
             },
             "finding_type": "Runtime",
             "state": "ACTIVE",
-            "finding_lifecycle": ["ACTIVE:::2022-09-30T16:42:57.901Z"],
+            "finding_lifecycle": "ACTIVE",
             "timestamp": "2022-09-30T16:42:57.901Z",
             "severity": "HIGH",
             "rule": "KUBE3",
             "finding_short": "Pod running as root",
             "finding_detail": "<remediation detail?>",
             "callback_url": "callback_url",
-            "issue_tracker_id": "tracker_id"
+            "issue_tracker_id": "tracker_id",
+            "last_evaluation": "test_last_evaluation",
+            "finding_remediation": "test_finding_remediation"
             }
         }
