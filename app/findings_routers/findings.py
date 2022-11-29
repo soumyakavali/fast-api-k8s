@@ -9,14 +9,14 @@ from findings_models.findings_model import Finding, FindingResponse
 router = APIRouter(prefix="/api")
 
 
-@router.get("/findings/", tags=["findings"],description="This will return all findings.", response_model=List[Finding])
-async def get_all_findings(request:Request):
+@router.get("/v1/finding/", tags=["findings"],description="This will return all findings.", response_model=List[Finding])
+async def get_all_finding(request:Request):
     """This will return all findings from database."""
     findings = list(request.app.database_collection.find(limit=100)) 
     return findings
 
-@router.post("/findings/", tags=["findings"],description="This will save given findings all.")
-async def get_all_findings(request:Request,findings_list:List[Finding]):
+@router.post("/v1/finding/", tags=["findings"],description="This will save given findings all.")
+async def create_new_finding(request:Request,findings_list:List[Finding]):
     """This will store all findings into database."""
     findings = jsonable_encoder(findings_list)
     new_findings = request.app.database_collection.insert_many(findings)

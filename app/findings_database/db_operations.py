@@ -5,8 +5,8 @@ from pymongo import MongoClient
 
 class DBClient:
     def __init__(self) -> None:
-        self.db_name = "test_db"#os.getenv("DB_NAME")
-        self.db_collection = "test_collection"# os.getenv("DB_COLLECTION")
+        self.db_name = os.getenv("DB_NAME")
+        self.db_collection = os.getenv("DB_COLLECTION")
         self.db_url =os.getenv("MONGO_DB_URL")
         self.db_tls_certfificatekeyfile = os.getenv("TLS_CERTIFICATEKEYFILE")
         self.tls_certificatekeyfile_password =os.getenv("TLS_CERTIFICATEKEYFILE_PASSWORD")
