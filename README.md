@@ -1,4 +1,4 @@
-This is micro-service developed by using python fastapi framework.
+This is micro-service which will provide REST API"s for all finding operations. This is developed by using python fastapi framework.
 
 # How to run locall
 
