@@ -14,7 +14,9 @@
                 "--reload"
             ],
             "env": {
-                "LOCAL":"Yes"
+                "LOCAL":"Yes",
+                "DB_NAME": "test_db",
+                "DB_COLLECTION": "test_collection"
             },
             "jinja": true,
             "justMyCode": true,

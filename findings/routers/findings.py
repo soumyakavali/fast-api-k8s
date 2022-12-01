@@ -5,17 +5,17 @@ from fastapi import APIRouter, Request,status
 from fastapi.encoders import jsonable_encoder
 from bson import json_util
 
-from findings_models.findings_model import Finding, FindingResponse
+from models.findings_model import Finding, FindingResponse
 router = APIRouter(prefix="/api")
 
 
-@router.get("/v1/finding/", tags=["findings"],description="This will return all findings.", response_model=List[Finding])
+@router.get("/v1/findings/", tags=["findings"],description="This will return all findings.", response_model=List[Finding])
 async def get_all_finding(request:Request):
     """This will return all findings from database."""
     findings = list(request.app.database_collection.find(limit=100)) 
     return findings
 
-@router.post("/v1/finding/", tags=["findings"],description="This will save given findings all.")
+@router.post("/v1/findings/", tags=["findings"],description="This will save all findings.")
 async def create_new_finding(request:Request,findings_list:List[Finding]):
     """This will store all findings into database."""
     findings = jsonable_encoder(findings_list)

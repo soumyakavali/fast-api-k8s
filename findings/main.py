@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
 from typing import List
-from findings_database.db_operations import DBClient
+from database.db_operations import DBClient
 
-from findings_routers import findings, health_check
+from routers import findings, health_check
 
 
 # Instantiate the FastAPI
